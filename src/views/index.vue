@@ -1,12 +1,16 @@
 <template>
-  <Condition :condition="condition" export-path="/ff" @search="search" />
+  <div>
+    <Condition :condition="condition" export-path="/ff" @search="search" />
+    <TableList />
+  </div>
 </template>
 <script lang="ts">
-import { Condition } from '@/export.ts'
+import { Condition, TableList } from '@/export.ts'
 import { Component, Vue } from 'vue-property-decorator'
 @Component({
   components: {
-    Condition
+    Condition,
+    TableList
   }
 })
 export default class Home extends Vue {
