@@ -1,6 +1,6 @@
 {
   "name": "lazyui",
-  "version": "0.2.1",
+  "version": "0.2.8",
   "main": "/dist/lazyui.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,11 +9,7 @@
     "pkg": "vue-cli-service build --target lib src/export.ts"
   },
   "devDependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^8.4.2",
-    "vue-router": "^3.2.0",
+    "@felbry/lazyapi": "^0.1.4",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-babel": "~4.5.0",
@@ -23,6 +19,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/eslint-config-typescript": "^5.0.2",
+    "core-js": "^3.6.5",
     "element-ui": "^2.14.1",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.2",
@@ -33,6 +30,10 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "typescript": "~3.9.3",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^8.4.2",
+    "vue-router": "^3.2.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

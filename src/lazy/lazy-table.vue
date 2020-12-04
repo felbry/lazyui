@@ -1,9 +1,10 @@
 <template>
   <div>
-    <Condition :condition="condition" @search="search" />
-    <TableList :list="list" :list-title="listTitle" />
+    <Condition ref="condition" :condition="condition" @search="search({}, ...arguments)" />
+    <TableList :list="list" :list-title="listTitle" @operation="operation" />
     <el-pagination
       background
+      layout="sizes, prev, pager, next, jumper, ->, total"
       :current-page.sync="pn"
       :page-size.sync="rn"
       :total="total"
@@ -28,10 +29,15 @@ export default {
     getListFunc: {
       type: Function,
       default: () => Promise.resolve({ list: [], listTitle: [], total: 0 })
+    },
+    extraCondition: {
+      type: Object,
+      default: () => ({})
     }
   },
   data () {
     return {
+      conditionFormCache: {},
       condition: [],
       list: [],
       listTitle: [],
@@ -47,19 +53,45 @@ export default {
       })
   },
   methods: {
-    search (conditionForm) {
+    search (
+      config = {
+        isResetPn: false,
+        isResetCondition: false
+      },
+      conditionForm
+    ) {
+      if (config.isResetCondition) {
+        return this.$refs.condition.reset()
+      }
       if (conditionForm) {
+        this.conditionFormCache = conditionForm
+      }
+      if (conditionForm || config.isResetPn) {
         this.pn = 1
       }
-      this.getListFunc()
+      this.getListFunc({
+        ...this.conditionFormCache,
+        ...this.extraCondition,
+        pn: this.pn,
+        rn: this.rn
+      })
         .then(data => {
           const { list, listTitle, total } = data
           this.list = list
           this.listTitle = listTitle
           this.total = total
         })
+    },
+    operation (operationOption) {
+      this.$emit('operation', operationOption)
     }
   }
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.el-pagination {
+  padding: 8px;
+  margin-top: 16px;
+  background-color: #fff;
+}
+</style>

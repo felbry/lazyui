@@ -10,11 +10,12 @@
         :placeholder="item['type:text'].placeholder || '请输入'">
       </el-input>
       <el-select
-        v-if="item['type:select']"
+        v-if="item['type:select'] || item['type:multiselect']"
         v-model="form[item.key]"
-        :placeholder="item['type:select'].placeholder || '请选择'">
+        :multiple="!!item['type:multiselect']"
+        :placeholder="(item['type:select'] || item['type:multiselect']).placeholder || '请选择'">
         <el-option
-          v-for="option in (item['type:select'].options || [])"
+          v-for="option in ((item['type:select'] || item['type:multiselect']).options || [])"
           :key="option.value"
           :value="option.value"
           :label="option.label"
@@ -127,6 +128,11 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.el-form {
+  padding: 16px 16px 0;
+  margin-bottom: 16px;
+  background-color: #fff;
+}
 .num-range-item {
   width: 80px!important;
   & + & {
