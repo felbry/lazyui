@@ -5,6 +5,8 @@
     <LazyTable
       :get-condition-func="getConditionFunc"
       :getListFunc="getListFunc"
+      export-url="/dfdd/ffdf"
+      :is-show-pagination="false"
       @operation="operation"
     />
   </div>

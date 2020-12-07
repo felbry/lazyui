@@ -1,8 +1,14 @@
 <template>
   <div>
-    <Condition ref="condition" :condition="condition" @search="search({}, ...arguments)" />
+    <Condition
+      ref="condition"
+      :condition="condition"
+      :export-url="exportUrl"
+      @search="search({}, ...arguments)"
+    />
     <TableList :list="list" :list-title="listTitle" @operation="operation" />
     <el-pagination
+      v-show="isShowPagination"
       background
       layout="sizes, prev, pager, next, jumper, ->, total"
       :current-page.sync="pn"
@@ -30,9 +36,13 @@ export default {
       type: Function,
       default: () => Promise.resolve({ list: [], listTitle: [], total: 0 })
     },
-    extraCondition: {
-      type: Object,
-      default: () => ({})
+    isShowPagination: {
+      type: Boolean,
+      default: true
+    },
+    exportUrl: {
+      type: String,
+      default: ''
     }
   },
   data () {
@@ -71,12 +81,11 @@ export default {
       }
       this.getListFunc({
         ...this.conditionFormCache,
-        ...this.extraCondition,
         pn: this.pn,
         rn: this.rn
       })
         .then(data => {
-          const { list, listTitle, total } = data
+          const { list, listTitle, total = 0 } = data
           this.list = list
           this.listTitle = listTitle
           this.total = total

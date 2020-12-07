@@ -52,4 +52,8 @@ export default {
 /deep/ .el-link + .el-link {
   margin-left: 10px;
 }
+// 某些项目中，比如：简题库。将cell的样式写成了不换行，导致出现了内容后边跟省略号的问题
+/deep/ .cell {
+  white-space: normal!important;
+}
 </style>
