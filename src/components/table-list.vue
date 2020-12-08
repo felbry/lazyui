@@ -25,6 +25,15 @@
         </template>
       </el-table-column>
       <el-table-column
+        v-else-if="item.type === 'html'"
+        :key="item.key"
+        :label="item.name"
+      >
+        <template slot-scope="scope">
+          <span v-html="scope.row[item.key]"></span>
+        </template>
+      </el-table-column>
+      <el-table-column
         v-else
         :key="item.key"
         :prop="item.key"
