@@ -4,8 +4,8 @@
     <TableList /> -->
     <LazyTable
       :get-condition-func="getConditionFunc"
-      :getListFunc="getListFunc"
-      export-url="/dfdd/ffdf"
+      :get-list-func="getListFunc"
+      :download-func="kkk"
       :is-show-pagination="false"
       @operation="operation"
     />
@@ -39,6 +39,10 @@ export default class Home extends Vue {
 
   operation (obj) {
     console.log(obj)
+  }
+
+  kkk (str) {
+    console.log(str)
   }
 }
 </script>

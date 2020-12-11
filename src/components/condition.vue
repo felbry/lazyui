@@ -48,7 +48,7 @@
     <el-form-item>
       <el-button type="success" @click="$emit('search', form)">查询</el-button>
       <el-button @click="reset">重置</el-button>
-      <el-button v-if="exportUrl" @click="download">导出</el-button>
+      <el-button v-if="downloadFunc" @click="download">导出</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -60,9 +60,9 @@ export default {
       type: Array,
       default: () => []
     },
-    exportUrl: {
-      type: String,
-      default: ''
+    downloadFunc: {
+      type: Function,
+      default: null
     }
   },
   data () {
@@ -104,13 +104,12 @@ export default {
       }
     },
     download () {
-      window.open(
-        `${this.exportUrl}?${Object.entries(
+      this.downloadFunc(
+        Object.entries(
           this.form
         )
           .map(([k, v]) => `${k}=${v}`)
-          .join('&')}&export=1
-        `
+          .join('&')
       )
     }
   },

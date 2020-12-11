@@ -3,7 +3,7 @@
     <Condition
       ref="condition"
       :condition="condition"
-      :export-url="exportUrl"
+      :download-func="downloadFunc"
       @search="search({}, ...arguments)"
     />
     <TableList :list="list" :list-title="listTitle" @operation="operation" />
@@ -36,13 +36,13 @@ export default {
       type: Function,
       default: () => Promise.resolve({ list: [], listTitle: [], total: 0 })
     },
+    downloadFunc: {
+      type: Function,
+      default: null
+    },
     isShowPagination: {
       type: Boolean,
       default: true
-    },
-    exportUrl: {
-      type: String,
-      default: ''
     }
   },
   data () {
