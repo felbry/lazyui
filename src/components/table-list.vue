@@ -3,6 +3,7 @@
     <template v-for="item in listTitle">
       <el-table-column
         v-if="item.type === 'operation'"
+        :width="calculateWidth(item.width)"
         :key="item.key"
         :label="item.name"
       >
@@ -26,6 +27,7 @@
       </el-table-column>
       <el-table-column
         v-else-if="item.type === 'html'"
+        :width="calculateWidth(item.width)"
         :key="item.key"
         :label="item.name"
       >
@@ -35,6 +37,7 @@
       </el-table-column>
       <el-table-column
         v-else
+        :width="calculateWidth(item.width)"
         :key="item.key"
         :prop="item.key"
         :label="item.name"
@@ -54,6 +57,15 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  methods: {
+    calculateWidth (width) {
+      if (typeof width === 'number') {
+        return `${width}px`
+      } else {
+        return ''
+      }
+    }
   }
 }
 </script>
@@ -65,4 +77,13 @@ export default {
 /deep/ .cell {
   white-space: normal!important;
 }
+/deep/ body {
+  background-color: red;
+}
+// /deep/ iframe {
+//   html,
+//   body {
+//     margin: 0;
+//   }
+// }
 </style>
