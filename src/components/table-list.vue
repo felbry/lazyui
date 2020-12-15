@@ -62,8 +62,10 @@ export default {
     calculateWidth (width) {
       if (typeof width === 'number') {
         return `${width}px`
+      } else if (typeof width === 'string' && /%$/.test(width)) {
+        return `${this.$el.parentNode.clientWidth * Number(`0.${width.slice(0, width.length - 1)}`)}px`
       } else {
-        return ''
+        return width || ''
       }
     }
   }
